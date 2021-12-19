@@ -14,9 +14,7 @@ jobs:
         uses: github/super-linter@v3.15.5
         env:
           VALIDATE_ALL_CODEBASE: true
-          VALIDATE_HTML: true
           VALIDATE_CSS: true
-          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
           VALIDATE_JAVASCRIPT_ES: true
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

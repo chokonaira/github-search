@@ -2,7 +2,7 @@
 
 ### Github Actions CI Badges
 
-[![Build CI](https://github.com/chokonaira/github-repos/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-repos/actions/workflows/build.yml) [![Linter](https://github.com/github-repos/recruiter-center/actions/workflows/linter.yml/badge.svg)](https://github.com/chokonaira/github-repos/actions/workflows/linter.yml)
+[![Node.js CI](https://github.com/chokonaira/github-profiles/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-profiles/actions/workflows/build.yml) [![Linter](https://github.com/chokonaira/github-profiles/actions/workflows/linter.yml/badge.svg)](https://github.com/chokonaira/github-profiles/actions/workflows/linter.yml)
 
 
 ## Project setup
