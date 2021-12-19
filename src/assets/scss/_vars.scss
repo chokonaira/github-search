@@ -1,0 +1,39 @@
+@function rem-calc($size) {
+    $remSize: $size / 16;
+    @return #{$remSize}rem;
+}
+
+$black: #000;
+$off-black: #202020;
+$dark-grey: #6e6e6e;
+$mid-grey: #909090;
+$mid-grey-2: #9C9B9B;
+$light-grey: #ddd;
+$off-white: #f7f7f7;
+$white: #fff;
+$crimson: #e71b14;
+$teal: #0B5028;
+$orange: #EF7003;
+$purple: #0C1899;
+$orchid: #7D32C1;
+
+// Font Size
+$font-size-8: rem-calc(8);
+$font-size-9: rem-calc(9);
+$font-size-10: rem-calc(10);
+$font-size-11: rem-calc(11);
+$font-size-12: rem-calc(12);
+$font-size-13: rem-calc(13);
+$font-size-14: rem-calc(14);
+$font-size-16: rem-calc(16);
+$font-size-18: rem-calc(18);
+$font-size-20: rem-calc(20);
+$font-size-24: rem-calc(24);
+$font-size-28: rem-calc(28);
+$font-size-32: rem-calc(32);
+$font-size-34: rem-calc(34);
+$font-size-40: rem-calc(40);
+$font-size-48: rem-calc(48);
+$font-size-56: rem-calc(56);
+$font-size-60: rem-calc(60);
+$font-size-72: rem-calc(72);
