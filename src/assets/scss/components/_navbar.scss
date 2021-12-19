@@ -1,0 +1,13 @@
+.navbar-container {
+  @include flex-row;
+  align-items: center;
+  height: 60px;
+  background-color: $blue-crayola;
+  color: $white;
+  justify-content: flex-start;
+}
+
+.navbar-title {
+  margin-left: 40px;
+
+}

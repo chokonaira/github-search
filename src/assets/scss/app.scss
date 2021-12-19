@@ -2,3 +2,8 @@
 @import 'vars.scss';
 @import 'breakpoints.scss';
 @import 'mixins.scss';
+@import 'components/_input.scss';
+@import 'components/_navbar.scss';
+
+
+* { margin: 0; padding: 0; }
