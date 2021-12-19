@@ -1,39 +1,22 @@
-# github-repos
+## github-profiles
 
 ### Github Actions CI Badges
 
 [![Node.js CI](https://github.com/chokonaira/github-profiles/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-profiles/actions/workflows/build.yml) [![Linter](https://github.com/chokonaira/github-profiles/actions/workflows/linter.yml/badge.svg)](https://github.com/chokonaira/github-profiles/actions/workflows/linter.yml)
 
+### Heroku URL
+- https://github-user-profiles.herokuapp.com/
 
-## Project setup
-```
-npm install
-```
+### Project setup
+- git clone https://github.com/chokonaira/github-profiles.git
+- npm install
+- npm start
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
-```
+### Run unit tests
+- npm run test:unit
 
 ### Run your end-to-end tests
-```
-npm run test:e2e
-```
+- npm run test:e2e
 
 ### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- npm run lint
