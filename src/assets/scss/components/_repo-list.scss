@@ -1,0 +1,11 @@
+/* Sass code */
+.repo-list-container {
+  display: flex;
+  background-color: $off-white;
+  width: 1000px;
+  max-width: 80%;
+  height: 60px;
+  margin: 10px;
+  box-shadow: 0 8px 3px -8px $purple;
+  padding: 20px;
+}

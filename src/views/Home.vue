@@ -2,21 +2,21 @@
   <div class="home-container">
       <Notification :state='state' :message='errorMessage' />
     <div class="home-input-button">
-      <Input placeholder="Search profiles by username"/>
+      <Input placeholder="Search github Rrpositorie"/>
       <Button title='Search'/>
     </div>
     <div class="github-profile-cards-container">
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
-      <ProfileCard />
+      <RepoList />
+      <RepoList />
+      <RepoList />
+      <RepoList />
+      <RepoList />
+      <RepoList />
+      <RepoList />
+      <RepoList />
+      <RepoList />
+      <RepoList />
+      <RepoList />
     </div>
   </div>
 </template>
@@ -24,14 +24,14 @@
 <script>
 import Input from '@/components/Input.vue';
 import Button from '@/components/Button.vue';
-import ProfileCard from '@/components/ProfileCard.vue';
+import RepoList from '@/components/RepoList.vue';
 import Notification from '@/components/Notification.vue';
 
 export default {
   components: {
     Input,
     Button,
-    ProfileCard,
+    RepoList,
     Notification,
   },
   data() {

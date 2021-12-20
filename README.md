@@ -1,14 +1,14 @@
-## github-profiles
+## Github Repository
 
 ### Github Actions CI Badges
 
-[![Node.js CI](https://github.com/chokonaira/github-profiles/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-profiles/actions/workflows/build.yml) [![Linter](https://github.com/chokonaira/github-profiles/actions/workflows/linter.yml/badge.svg)](https://github.com/chokonaira/github-profiles/actions/workflows/linter.yml)
+[![Node.js CI](https://github.com/chokonaira/github-repository/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-repository/actions/workflows/build.yml) [![Linter](https://github.com/chokonaira/github-repository/actions/workflows/linter.yml/badge.svg)](https://github.com/chokonaira/github-repository/actions/workflows/linter.yml)
 
 ### Heroku URL
-- https://github-user-profiles.herokuapp.com/
+- https://github-user-repository.herokuapp.com/
 
 ### Project setup
-- git clone https://github.com/chokonaira/github-profiles.git
+- git clone https://github.com/chokonaira/github-repository.git
 - npm install
 - npm start
 
