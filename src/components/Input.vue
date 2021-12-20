@@ -1,7 +1,7 @@
 <template>
   <ui-textfield
   outlined
-  placeholder="search profiles"
+  placeholder="Search profiles"
   v-model="searchValue"
   class='search-input'>
 </ui-textfield>

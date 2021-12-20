@@ -26,6 +26,13 @@
   }
 }
 
+// Extra extra large devices
+@mixin xxl {
+  @media (min-width: #{$screen-xxl-min}) {
+      @content;
+  }
+}
+
 @mixin flex-row {
   display: flex;
   flex-direction: row;

@@ -4,7 +4,7 @@
   margin-top: 5px;
   width: 400px;
   max-width: 80%;
-  @include sm {
+  @include md {
     margin-top: 0;
     margin-left: 5px;
     width: 100px;

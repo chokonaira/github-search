@@ -1,0 +1,43 @@
+/* Sass code */
+.demo-card {
+  display: flex;
+  width: 400px;
+  max-width: 80%;
+  margin: 10px;
+  height: 200px;
+  @include md {
+    max-width: 75%;
+  }
+}
+
+img {
+  width: 120px;
+  height: inherit;
+  max-width: 80%;
+}
+
+.demo-card__music-row {
+  display: flex;
+  border-top-left-radius: inherit;
+}
+
+.demo-card__media--music {
+  width: 110px;
+  border-top-left-radius: inherit;
+}
+
+.demo-card__music-info {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px;
+}
+
+.demo-card__action-buttons--text-only {
+  margin-left: 8px;
+}
+
+.demo-card__action-icon--star {
+  margin-left: 4px;
+  margin-right: 4px;
+  cursor: pointer;
+}
