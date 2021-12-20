@@ -6,39 +6,10 @@
   }
 }
 
-.home-input-button {
+.github-repo-list-container {
   @include flex-col;
   align-items: center;
   justify-content: center;
-  height: 200px;
   width: 100%;
-
-  @include sm {
-    @include flex-col;
-    margin-right: 90px;
-  }
-  @include md {
-    @include flex-row;
-    margin-right: 90px;
-  }
-  @include xxl {
-    width: 43%;
-  }
+  margin-top: 100px;
 }
-
-// .github-profile-cards-container {
-//   display: flex;
-//   align-items: center;
-//   flex-direction: column;
-//   @include md {
-//     display: grid;
-//     grid-template-columns: repeat(2, 1fr);
-//     grid-row-gap: 14px;
-//   }
-//   @include xl {
-//     grid-template-columns: repeat(3, 1fr);
-//   }
-//   @include xxl {
-//     grid-template-columns: repeat(4, 1fr);
-//   }
-// }

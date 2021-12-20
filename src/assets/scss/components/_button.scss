@@ -1,13 +1,19 @@
 .search-btn {
-  padding: 10px;
-  height: 40px;
-  margin-top: 5px;
-  width: 400px;
+  padding: 5px;
+  width: 70px;
   max-width: 80%;
-  @include md {
-    margin-top: 0;
-    margin-left: 5px;
+  font-size: $font-size-12;
+  background: $white !important;
+  color: $dark-grey !important;
+  margin-left: 5px;
+  margin-bottom: 3px;
+  height: 32px;
+  @include sm {
+    height: 40px;
     width: 100px;
-    height: 42px;
+  }
+
+  &:hover {
+    background: $platinum !important;
   }
 }

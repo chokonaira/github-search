@@ -1,0 +1,53 @@
+.demo-card {
+  margin: 48px;
+  width: 970px;
+  max-width: 80%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.demo-card-article-group-heading {
+  padding: 8px 16px;
+}
+
+.demo-card-article {
+  padding: 16px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.demo-card-article__title {
+  margin: 0 0 4px 0;
+  color: $dark-grey;
+}
+
+.demo-card-article__snippet {
+  margin: 0;
+  color: $dark-grey;;
+  font-size: $font-size-16;
+}
+
+.search-query {
+  font-weight: bold;
+  color: $dark-grey;
+  font-style: italic;
+  font-size: $font-size-14;
+}
+
+.repo-numbers-container {
+  @include flex-row;
+  align-items: center;
+}
+
+.repo-numbers {
+  @include flex-row;
+  align-items: center;
+  font-size: $font-size-14;
+  height: 40px;
+  width: 100px;
+
+  span {
+    font-size: $font-size-14;
+    margin-left: 3px;
+  }
+}

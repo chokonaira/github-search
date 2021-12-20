@@ -1,16 +1,31 @@
 .search-input {
-  width: 400px;
-  max-width: 80%;
-  height: 45px;
-  @include lg {
-    width: 500px;
+    width: 130px;
+    min-width: 10%;
+    height: 30px;
+    border-radius: 3px;
+    border: 1px solid $white;
+    padding-left: 12px;
+    font-size: $font-size-16;
+  @include sm {
+    width: 200px;
+    min-width: 60%;
+    height: 38px;
   }
-  @include xl {
-    width: 600px;
+  @include md {
+    width: 300px;
+  }
+
+  &:focus{
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $dark-grey;
+    font-size: $font-size-16;
   }
 }
 
 .mdc-floating-label {
-  color: $dark-grey !important;
+  color: $white !important;
   border: none !important;
 }

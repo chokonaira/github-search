@@ -1,10 +1,9 @@
 <template>
-  <ui-textfield
-  outlined
-  :placeholder="placeholder"
-  v-model="searchValue"
-  class='search-input'>
-</ui-textfield>
+  <input type="text"
+    :placeholder="placeholder"
+    v-model="searchValue"
+    class='search-input'
+  >
 </template>
 
 <script>
