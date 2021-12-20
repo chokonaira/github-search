@@ -1,0 +1,13 @@
+.home-input-button {
+  @include flex-col;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+
+  @include sm {
+    @include flex-row;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+  }
+}

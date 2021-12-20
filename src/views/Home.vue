@@ -1,34 +1,16 @@
 <template>
-   <div class="home">
+   <div class="home-input-button">
      <Input />
-    <h1>This is an Home page</h1>
+     <Button />
   </div>
 </template>
 
 <script>
 import Input from '@/components/Input.vue';
+import Button from '@/components/Button.vue';
 
 export default {
   name: 'Home',
-  components: { Input },
+  components: { Input, Button },
 };
 </script>
-
-// <style lang='scss' scoped>
-// .home {
-//     color: $orchid;
-//     font-size: $font-size-8;
-//   @include sm {
-//     color: $teal;
-//     font-size: $font-size-16;
-//   }
-//   @include md {
-//     color: $crimson;
-//     font-size: $font-size-32;
-//   }
-//   @include lg {
-//     color: $black;
-//     font-size: $font-size-60;
-//   }
-// }
-// </style>

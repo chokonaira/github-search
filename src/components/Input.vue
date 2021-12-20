@@ -1,9 +1,10 @@
 <template>
   <ui-textfield
-  v-model="searchValue">
-  Seach github user
+  outlined
+  placeholder="search profiles"
+  v-model="searchValue"
+  class='search-input'>
 </ui-textfield>
-<p>{{searchValue}}</p>
 </template>
 
 <script>

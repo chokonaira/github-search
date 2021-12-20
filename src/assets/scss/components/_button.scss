@@ -1,0 +1,13 @@
+.search-btn {
+  padding: 10px;
+  height: 40px;
+  margin-top: 5px;
+  width: 400px;
+  max-width: 80%;
+  @include sm {
+    margin-top: 0;
+    margin-left: 5px;
+    width: 100px;
+    height: 42px;
+  }
+}
