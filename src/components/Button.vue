@@ -1,7 +1,14 @@
 <template>
-  <ui-button class='search-btn' raised>Search</ui-button>
+  <ui-button class='search-btn' raised>{{ title }}</ui-button>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    title: {
+      type: String,
+      required: true,
+    },
+  },
+};
 </script>

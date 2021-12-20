@@ -14,6 +14,10 @@
   width: 100%;
 
   @include sm {
+    @include flex-col;
+    margin-right: 90px;
+  }
+  @include md {
     @include flex-row;
     margin-right: 90px;
   }

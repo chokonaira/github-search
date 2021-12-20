@@ -1,7 +1,7 @@
 <template>
   <ui-textfield
   outlined
-  placeholder="Search profiles"
+  :placeholder="placeholder"
   v-model="searchValue"
   class='search-input'>
 </ui-textfield>
@@ -9,6 +9,12 @@
 
 <script>
 export default {
+  placeholder: {
+    placeholder: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       searchValue: '',
