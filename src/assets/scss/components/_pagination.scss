@@ -1,21 +1,32 @@
-.pagination-wrapper {
+.pagination-container {
   @include flex-row;
   justify-content: flex-end;
-  width: 970px;
+  width: 100%;
   max-width: 90%;
   margin-top: 18px;
+  background-color: yellow;
   @include sm {
     @include flex-row;
     justify-content: flex-end;
-    width: 970px;
+    width: 100%;
     max-width: 80%;
     margin-top: 18px;
   }
 }
 
-.pagination {
-  width: 200px;
-  max-width: 80%;
+.pagination-wrapper {
+  @include flex-row;
+  align-items: center;
+  width: 20%;
+  // background: red;
+  justify-content: space-between;
+}
+
+.pagination-btn {
+  width: 50px;
+  height: 40px;
+  border-radius: 5px;
+  border-color: transparent;
 }
 
 .mdc-pagination .mdc-button {

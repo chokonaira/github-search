@@ -26,6 +26,11 @@
     </ui-card>
 </template>
 <script>
+import { mapState } from 'vuex';
 
-export default {};
+export default {
+  computed: {
+    ...mapState(['isLoading', 'repositories', 'searchValue']),
+  },
+};
 </script>

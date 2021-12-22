@@ -30,10 +30,10 @@ export default createStore({
     },
   },
   actions: {
-    async fetchRepositories({ commit }, payload) {
+    async fetchRepositories({ commit }, payload = 'random') {
       try {
         commit('setSpinner');
-        const { data } = await axios.get(`https://api.github.com/search/repositories?q=${payload}&page=10`);
+        const { data } = await axios.get(`https://api.github.com/search/repositories?q=${payload}&page=1`);
         commit('setSearchValue', payload);
         commit('addRepositories', data);
       } catch (error) {

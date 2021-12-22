@@ -39,6 +39,9 @@ export default {
       state: 'error',
     };
   },
+  mounted() {
+
+  },
   computed: {
     ...mapState(['isLoading', 'isFetched', 'searchValue', 'popupNotification', 'errors', 'repositories']),
     toggleHomePageDisplay() {
