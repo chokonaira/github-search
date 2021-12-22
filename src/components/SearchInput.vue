@@ -1,22 +1,31 @@
 <template>
   <div class="navbar-search">
     <input type="text"
-      placeholder="Repo name"
+      :placeholder='placeholder'
       v-model="searchValue"
       class='search-input'
       v-bind="$attrs"
     >
-    <Button @click="fetchRepo(searchValue)" title='Search'/>
+    <Button
+        @click="fetchRepo(searchValue.trim())"
+        :disabled="toggleDiableButton"
+        title='Search'/>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex';
+import { mapActions } from 'vuex';
 import Button from '@/components/Button.vue';
 
 export default {
   components: {
     Button,
+  },
+  props: {
+    placeholder: {
+      type: String,
+      required: true,
+    },
   },
   placeholder: {
     placeholder: {
@@ -27,16 +36,20 @@ export default {
   data() {
     return {
       searchValue: '',
-      emptySearchValueMessage: '',
+      disable: true,
     };
+  },
+  computed: {
+    toggleDiableButton() {
+      if (!this.searchValue) {
+        return this.disable;
+      }
+      return !this.disable;
+    },
   },
   methods: {
     ...mapActions(['fetchRepositories']),
-    ...mapMutations(['validatedInput']),
     fetchRepo(searchValue) {
-      if (this.searchValue === '') {
-        return this.validatedInput('Empty search input');
-      }
       return this.fetchRepositories(searchValue);
     },
   },

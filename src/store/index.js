@@ -4,31 +4,29 @@ import axios from 'axios';
 export default createStore({
   state: {
     isLoading: false,
-    popupNotification: false,
+    isFetched: false,
     errors: null,
+    isNotification: false,
     searchValue: null,
     repositories: [],
   },
   mutations: {
-    validatedInput(state, payload) {
-      state.errors = payload;
-      state.popupNotification = true;
-    },
     setSearchValue(state, payload) {
       state.searchValue = payload;
     },
     setSpinner(state) {
       state.isLoading = true;
-      state.popupNotification = false;
+      state.isNotification = false;
     },
     addRepositories(state, payload) {
       state.isLoading = false;
-      state.repositories = payload.items;
+      state.isFetched = true;
+      state.repositories = payload;
     },
     apiError(state, payload) {
       state.isLoading = false;
       state.errors = payload;
-      state.popupNotification = true;
+      state.isNotification = true;
     },
   },
   actions: {

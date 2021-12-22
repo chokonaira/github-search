@@ -1,11 +1,11 @@
 .search-input {
-    width: 130px;
+    width: 100px;
     min-width: 10%;
     height: 30px;
-    border-radius: 3px;
-    border: 1px solid $white;
+    border-radius: 5px;
     padding-left: 12px;
     font-size: $font-size-16;
+    color: $dark-grey;
   @include sm {
     width: 200px;
     min-width: 60%;
@@ -29,3 +29,4 @@
   color: $white !important;
   border: none !important;
 }
+

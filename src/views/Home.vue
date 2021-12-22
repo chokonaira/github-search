@@ -3,7 +3,18 @@
       <Notification v-if="popupNotification" :state='state' :message='errors' />
     <div class="github-repo-list-container">
       <Spinner v-if="isLoading"/>
-      <RepoCard v-else />
+      <div class="github-repo-list" v-else>
+        <RepoCard v-if="toggleHomePageDisplay" />
+        <div class="display-message" v-else>
+          <img class='github-logo bounce' src="@/assets/images/github-logo-dark.png"
+            alt="github logo">
+          <h1 v-if="noRepositoryFound" class='home-text'>
+            <span>We couldn’t find any repositories</span>
+            <span> matching "{{searchValue}}"</span>
+          </h1>
+          <h1 v-else class='home-text'>Search for any Github Repository</h1>
+        </div>
+      </div>
     </div>
     <Pagination />
   </div>
@@ -26,13 +37,15 @@ export default {
   data() {
     return {
       state: 'error',
-      page: 1,
     };
   },
   computed: {
-    ...mapState(['isLoading', 'popupNotification', 'errors']),
-    console() {
-      return console.log('console', this.repositories);
+    ...mapState(['isLoading', 'isFetched', 'searchValue', 'popupNotification', 'errors', 'repositories']),
+    toggleHomePageDisplay() {
+      return this.repositories.total_count > 0;
+    },
+    noRepositoryFound() {
+      return this.isFetched && this.repositories.total_count === 0;
     },
   },
 };

@@ -1,4 +1,37 @@
-.ui-pagination {
-  align-items: center;
+.pagination-wrapper {
+  @include flex-row;
   justify-content: flex-end;
+  width: 970px;
+  max-width: 90%;
+  margin-top: 18px;
+  @include sm {
+    @include flex-row;
+    justify-content: flex-end;
+    width: 970px;
+    max-width: 80%;
+    margin-top: 18px;
+  }
+}
+
+.pagination {
+  width: 200px;
+  max-width: 80%;
+}
+
+.mdc-pagination .mdc-button {
+  background: $light-grey !important;
+  color: $white !important;
+  border: none !important;
+  width: 35px !important;
+  height: 35px !important;
+  color: $dark-grey !important;
+
+  &:hover {
+    cursor: pointer !important;
+    background: $dark-grey !important;
+    color: $white !important;
+  }
+  &:active {
+    background: $light-grey !important;
+  }
 }

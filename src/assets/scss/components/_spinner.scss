@@ -1,6 +1,7 @@
 .spinner-wrapper {
   @include flex-col;
-  align-items: center;
+  justify-content: center;
+  height: 60vh;
 }
 
 .spinner-text {
@@ -8,6 +9,7 @@
   color: $dark-grey !important;
   margin-top: 10px;
 }
-.mdc-linear-progress__buffer {
-  background: $dark-grey;
+
+.mdc-circular-progress__indeterminate-circle-graphic {
+  stroke: $dark-grey;
 }
