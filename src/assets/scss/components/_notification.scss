@@ -2,6 +2,9 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  position: relative;
+  margin-top: 60px;
+  z-index: 9999;
 }
 
 .mdc-alert.mdc-alert--error {
@@ -10,10 +13,15 @@
 
 .alert {
   width: 90%;
+  font-size: $font-size-10;
   margin-top: 10px;
   margin-bottom: 0;
-  @include xl {
+  @include sm {
+    font-size: $font-size-14;
     width: 95%;
+  }
+  @include lg {
+    font-size: $font-size-18;
   }
 }
 .mdc-alert__close-button {

@@ -7,20 +7,20 @@
       v-bind="$attrs"
     >
     <Button
-        @click="fetchRepo(searchValue.trim())"
+        @click="searchRepo"
         :disabled="toggleDiableButton"
         title='Search'/>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import Button from '@/components/Button.vue';
 
 export default {
   components: {
     Button,
   },
+  emits: ['search'],
   props: {
     placeholder: {
       type: String,
@@ -48,9 +48,8 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['fetchRepositories']),
-    fetchRepo(searchValue) {
-      return this.fetchRepositories(searchValue);
+    searchRepo() {
+      this.$emit('search', this.searchValue.trim());
     },
   },
 };

@@ -1,12 +1,12 @@
 <template>
   <ui-card outlined class="demo-card">
   <div
-    v-if="repositories.total_count>0"
+    v-if="repositories?.total_count>0"
     :class="[$tt('subtitle2'), 'demo-card-article-group-heading']">
-    Github Repository matching: <span class="search-query">{{searchValue}}</span>
+    Github Repository matching: <span class="search-query">{{repoMatch}}</span>
   </div>
   <ui-list-divider></ui-list-divider>
-    <div v-for="(item, index) in repositories.items" :key="index">
+    <div v-for="(item, index) in repositories?.items" :key="index">
       <div v-ripple  class="demo-card-article">
         <div>
           <h3 class="demo-card-article__title">
@@ -29,8 +29,18 @@
 import { mapState } from 'vuex';
 
 export default {
+  props: {
+    repositories: {
+      type: Object,
+      required: true,
+    },
+    repoMatch: {
+      type: String,
+      required: true,
+    },
+  },
   computed: {
-    ...mapState(['isLoading', 'repositories', 'searchValue']),
+    ...mapState(['isLoading', 'searchValue']),
   },
 };
 </script>

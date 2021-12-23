@@ -1,5 +1,5 @@
 <template>
-<div   v-if="repositories.total_count > pagaginationTrigger" class="pagination-wrapper">
+<div   v-if="repositories?.total_count > pagaginationTrigger" class="pagination-wrapper">
   <ui-pagination
     class="pagination"
     v-model="page"
