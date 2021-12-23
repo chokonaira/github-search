@@ -5,7 +5,7 @@
       <img class='nav-logo' src="@/assets/images/github-logo-dark.png"
             alt="github logo">
     </router-link>
-      <SearchInput :placeholder="'search or jump to...'" />
+      <SearchInput :placeholder="'search repo..'" />
   </div>
 </template>
 <script>

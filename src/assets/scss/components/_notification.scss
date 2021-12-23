@@ -1,11 +1,12 @@
 .notification-container {
-  display: flex;
+  @include flex-row;
   justify-content: center;
   width: 100%;
-}
-
-.mdc-alert.mdc-alert--error {
-  position: absolute;
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin-top: 60px;
 }
 
 .alert {

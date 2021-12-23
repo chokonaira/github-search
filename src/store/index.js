@@ -7,12 +7,12 @@ export default createStore({
     isFetched: false,
     errors: null,
     isNotification: false,
-    searchValue: null,
+    searchTerm: null,
     repositories: [],
   },
   mutations: {
-    setSearchValue(state, payload) {
-      state.searchValue = payload;
+    setsearchTerm(state, payload) {
+      state.searchTerm = payload;
     },
     setSpinner(state) {
       state.isLoading = true;
@@ -34,7 +34,7 @@ export default createStore({
       try {
         commit('setSpinner');
         const { data } = await axios.get(`https://api.github.com/search/repositories?q=${payload}&page=1`);
-        commit('setSearchValue', payload);
+        commit('setsearchTerm', payload);
         commit('addRepositories', data);
       } catch (error) {
         commit('apiError', error.message);

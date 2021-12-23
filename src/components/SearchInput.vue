@@ -2,13 +2,13 @@
   <div class="navbar-search">
     <input type="text"
       :placeholder='placeholder'
-      v-model="searchValue"
+      v-model="searchTerm"
       class='search-input'
       v-bind="$attrs"
     >
     <Button
-        @click="fetchRepo(searchValue.trim())"
-        :disabled="toggleDiableButton"
+        @click="fetchRepo(searchTerm.trim())"
+        :disabled="!searchTerm ? true : false"
         title='Search'/>
   </div>
 </template>
@@ -35,22 +35,13 @@ export default {
   },
   data() {
     return {
-      searchValue: '',
-      disable: true,
+      searchTerm: '',
     };
-  },
-  computed: {
-    toggleDiableButton() {
-      if (!this.searchValue) {
-        return this.disable;
-      }
-      return !this.disable;
-    },
   },
   methods: {
     ...mapActions(['fetchRepositories']),
-    fetchRepo(searchValue) {
-      return this.fetchRepositories(searchValue);
+    fetchRepo(searchTerm) {
+      return this.fetchRepositories(searchTerm);
     },
   },
 };

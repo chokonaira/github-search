@@ -1,5 +1,5 @@
 <template>
-<div   v-if="repositories.total_count > pagaginationTrigger" class="pagination-wrapper">
+<div  v-if="toggleHomePaginationDisplay" class="pagination-wrapper">
   <ui-pagination
     class="pagination"
     v-model="page"
@@ -20,7 +20,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(['repositories']),
+    ...mapState(['repositories', 'isLoading']),
+    toggleHomePaginationDisplay() {
+      return this.repositories.total_count > this.pagaginationTrigger && !this.isLoading;
+    },
   },
 };
 </script>
