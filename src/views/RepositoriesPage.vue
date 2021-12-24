@@ -1,5 +1,5 @@
 <template>
-  <div class="home-container">
+  <div class="repositories-container">
       <Notification v-if="isNotification" :state='state' :message='errors' />
     <div class="github-repo-list-container">
       <Spinner v-if="isLoading"/>

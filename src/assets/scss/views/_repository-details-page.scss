@@ -1,0 +1,30 @@
+.repo-details-container {
+  @include flex-col;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 70px;
+  height: 80vh;
+}
+
+.repo-details-wrapper {
+  @include flex-col;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 400px;
+  margin-top: 70px;
+  background: $dark-grey;
+
+  img {
+    color: $white;
+  }
+
+  h1 {
+    color: $white;
+  }
+}
+
+.repo-details-back-link {
+  cursor: pointer;
+}

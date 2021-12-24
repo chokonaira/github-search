@@ -7,7 +7,8 @@
   </div>
   <ui-list-divider></ui-list-divider>
     <div v-for="(item, index) in repositories.items" :key="index">
-      <router-link class="navbar-link" to='/repo-details/:id'>
+      <router-link class="navbar-link"
+      :to="{ name: 'RepositoryDetailsPage', params: { repository: JSON.stringify(item)} }">
         <div v-ripple  class="demo-card-article">
           <div>
             <h3 class="demo-card-article__title">
