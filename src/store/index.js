@@ -1,5 +1,7 @@
 import { createStore } from 'vuex';
-import axios from 'axios';
+import useSWRV from 'swrv';
+import LocalStorageCache from 'swrv/dist/cache/adapters/localStorage';
+import fetcher from '@/helpers/fetcher';
 
 export default createStore({
   state: {
@@ -43,27 +45,36 @@ export default createStore({
   },
   actions: {
     async fetchRepositories({ commit, state }, { searchTerm, page }) {
-      try {
-        commit('setSpinner');
-        const { data } = await axios.get(`https://api.github.com/search/repositories?q=${searchTerm}&page=${page}&per_page=${state.perPage}`);
-        commit('setsearchTerm', searchTerm);
-        commit('setCurrentPage', page);
-        commit('addRepositories', data);
-      } catch ({ message }) {
-        if (page > 67) {
-          commit('setErrors', 'Only the first 1000 repos results are available');
-        } else {
-          commit('setErrors', message);
-        }
+      commit('setSpinner');
+      console.log(searchTerm, page);
+
+      const { data, error } = useSWRV(`https://api.github.com/search/repositories?q=${searchTerm}&page=${page}&per_page=${state.perPage}`, fetcher, {
+        cache: new LocalStorageCache(),
+        shouldRetryOnError: false,
+        revalidateDebounce: 2000,
+        refreshInterval: 2000,
+        ttl: 60 * 60 * 1000,
+      });
+      commit('setsearchTerm', searchTerm);
+      commit('setCurrentPage', page);
+      commit('addRepositories', data);
+
+      if (error.value) {
+        commit('setErrors', error.value);
       }
     },
     async fetchRepository({ commit }, { owner, repo }) {
-      try {
-        commit('setSpinner');
-        const { data } = await axios.get(`https://api.github.com/repos/${owner}/${repo}`);
-        commit('addRepository', data);
-      } catch (error) {
-        commit('setErrors', error.message);
+      commit('setSpinner');
+      const { data, error } = useSWRV(`https://api.github.com/repos/${owner}/${repo}`, fetcher, {
+        cache: new LocalStorageCache(),
+        shouldRetryOnError: false,
+        revalidateDebounce: 2000,
+        refreshInterval: 2000,
+        ttl: 60 * 60 * 1000,
+      });
+      commit('addRepository', data);
+      if (error.value) {
+        commit('setErrors', error.value);
       }
     },
   },

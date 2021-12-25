@@ -8,13 +8,13 @@
               <div class="repo-image-with-btn">
                 <button class="repo-details-back-link"
                 @click="$router.back()"><ui-icon>west</ui-icon></button>
-                <img :src='repository.owner?.avatar_url' alt="repoDetails owner avatar"/>
+                <img :src='repository?.owner.avatar_url' alt="repoDetails owner avatar"/>
               </div>
               <div>
-                <h5><span>Owner:</span> {{repository.owner?.login}}</h5>
-                <h5>Repo name: {{repository.name}}</h5>
+                <h5><span>Owner:</span> {{repository?.owner.login}}</h5>
+                <h5>Repo name: {{repository?.name}}</h5>
                 <h5><span>Created on:</span> {{date}}</h5>
-                <a :href="repository.clone_url"
+                <a :href="repository?.clone_url"
                 target="_blank">Preview repo on github<ui-icon :size="24">open_in_new</ui-icon></a>
               </div>
             </div>
@@ -64,7 +64,7 @@ export default {
   computed: {
     ...mapState(['isLoading', 'isRepoFetched', 'isNotification', 'errors', 'repository']),
     date() {
-      return dateFormatter(this.repository.created_at);
+      return dateFormatter(this.repository?.created_at);
     },
     isRepositoryFound() {
       return !this.isLoading && this.isRepoFetched;

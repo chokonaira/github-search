@@ -7,13 +7,8 @@
 <script>
 export default {
   props: {
-    state: {
-      type: String,
-      required: true,
-    },
     message: {
-      type: String,
-      required: true,
+      type: String || undefined,
     },
   },
 };

@@ -34,11 +34,6 @@ export default {
     Spinner,
     Pagination,
   },
-  data() {
-    return {
-      state: 'error',
-    };
-  },
   mounted() {
     this.fetchRepositories({
       searchTerm: this.searchTerm || 'random',
