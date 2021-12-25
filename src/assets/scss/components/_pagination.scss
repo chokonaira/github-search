@@ -3,9 +3,10 @@
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    width: 30%;
     margin-bottom: 32px;
-  @include md {
+    max-width: 85%;
+    @include sm {
+    width: 30%;
     margin-bottom: 32px
   }
 }
@@ -14,17 +15,23 @@
   @include flex-row;
   justify-content: space-between;
   align-items: center;
-  width: 70%;
+  width: 100%;
+  @include sm {
+    width: 70%;
+  }
 }
 
 .pagination-counter {
   @include flex-row;
-  width: 179px;
   height: 32px;
   align-items: center;
   justify-content: space-around;
   margin: 4px;
   padding: 1px;
+  max-width: 100%;
+  @include sm {
+    width: 179px;
+  }
 }
 
 .pagination-input {
@@ -36,8 +43,12 @@
   letter-spacing: normal;
   line-height: 24px;
   font-size: $font-size-16;
-  height: 34px;
-  width: 80px;
+  height: 30px;
+  width: 50px;
+  @include sm {
+    width: 80px;
+
+  }
 
   &:focus{ 
     border: 2px solid $light-grey;
@@ -54,8 +65,11 @@
 .total-page {
   letter-spacing: normal;
   line-height: 24px;
+  font-size: $font-size-14;
+  margin-left: 8px;
+  @include md {
   font-size: $font-size-16;
-  margin-left: 8px
+  }
 }
 
 .icons {
@@ -66,8 +80,8 @@
   width: 50px;
   background: $light-grey;
   border-radius: 3px;
-  padding: 7px;
-  margin: 7px;
+  padding: 4px;
+  margin: 10px;
 
   &:hover {
     cursor: pointer;

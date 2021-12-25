@@ -1,6 +1,6 @@
 <template>
   <div class="notification-container">
-    <ui-alert class="alert" :state='state' closable>{{message}}</ui-alert>
+    <ui-alert class="alert" state='error' closable>{{message}}</ui-alert>
   </div>
 </template>
 

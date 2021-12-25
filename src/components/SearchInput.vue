@@ -2,19 +2,19 @@
   <div class="navbar-search">
     <input type="text"
       :placeholder='placeholder'
-      v-model="searchTerm"
+      v-model.trim="searchTerm"
       class='search-input'
       v-bind="$attrs"
     >
     <Button
-        @click="fetchRepo(searchTerm.trim())"
+        @click="fetchRepos()"
         :disabled="!searchTerm ? true : false"
         title='Search'/>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Button from '@/components/Button.vue';
 
 export default {
@@ -38,10 +38,16 @@ export default {
       searchTerm: '',
     };
   },
+  computed: {
+    ...mapState(['currentPage']),
+  },
   methods: {
     ...mapActions(['fetchRepositories']),
-    fetchRepo(searchTerm) {
-      this.fetchRepositories(searchTerm);
+    fetchRepos() {
+      this.fetchRepositories({
+        searchTerm: this.searchTerm,
+        page: this.currentPage,
+      });
       this.searchTerm = '';
     },
   },

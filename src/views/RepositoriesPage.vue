@@ -1,6 +1,6 @@
 <template>
   <div class="repositories-container">
-      <Notification v-if="isNotification" :state='state' :message='errors' />
+      <Notification v-if="isNotification" :message='errors' />
     <div class="github-repo-list-container">
       <Spinner v-if="isLoading"/>
       <div class="github-repo-list" v-else>
@@ -14,17 +14,7 @@
           </h1>
           <h1 v-else class='home-text'>Search for any Github Repository</h1>
         </div>
-        <Pagination
-          v-if="togglePaginationDisplay"
-          :targetPage="page"
-          :per="perPage"
-          :totalRows="repositories.total_count"
-          @nextPage="nextPage"
-          @previousPage="previousPage"
-          @firstPage="firstPage"
-          @lastPage="lastPage"
-          @paginationInput="paginationInput"
-          />
+        <Pagination v-if="togglePaginationDisplay" />
       </div>
     </div>
   </div>
@@ -47,13 +37,11 @@ export default {
   data() {
     return {
       state: 'error',
-      page: undefined,
     };
   },
   mounted() {
-    this.page = this.currentPage;
     this.fetchRepositories({
-      searchTerm: 'random',
+      searchTerm: this.searchTerm || 'random',
       page: this.currentPage,
     });
   },
@@ -71,32 +59,6 @@ export default {
   },
   methods: {
     ...mapActions(['fetchRepositories']),
-    nextPage(computedPageNumber) {
-      this.page = parseInt(computedPageNumber, 10);
-      this.fetchRepo();
-    },
-    previousPage(computedPageNumber) {
-      this.page = parseInt(computedPageNumber, 10);
-      this.fetchRepo();
-    },
-    firstPage(computedPageNumber) {
-      this.page = parseInt(computedPageNumber, 10);
-      this.fetchRepo();
-    },
-    lastPage(computedPageNumber) {
-      this.page = parseInt(computedPageNumber, 10);
-      this.fetchRepo();
-    },
-    paginationInput(computedPageNumber) {
-      this.page = parseInt(computedPageNumber, 10);
-      this.fetchRepo();
-    },
-    fetchRepo() {
-      this.fetchRepositories({
-        searchTerm: this.searchTerm,
-        page: this.page,
-      });
-    },
   },
 };
 </script>

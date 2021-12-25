@@ -101,9 +101,11 @@
   height: 40px;
   width: 40px;
   border: none;
+  background: $light-grey;
 
   &:hover {
-    opacity: 0.7;
+    background: $dark-grey;
+    color: $white;
   }
 }
 

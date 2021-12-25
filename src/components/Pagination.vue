@@ -2,28 +2,28 @@
   <div class="pagination-control">
     <div class="pagination-wrapper">
       <button class="icons"
-              @click="firstPageEvent" :disabled="previousButtonDisabled">
+              @click="firstPage" :disabled="previousButtonDisabled">
         <PaginationFirstPageArrow/>
       </button>
       <button class="icons"
-      @click="previousPageEvent" :disabled="previousButtonDisabled">
+      @click="previousPage" :disabled="previousButtonDisabled">
         <PaginationPreviousPageArrow/>
       </button>
       <div class="pagination-counter">
         <input @keyup.enter="inputError ? $event.target.focus() : $event.target.blur()"
-               @blur="inputError ? $event.target.focus() : submitPageInput()"
+               @blur="inputError ? $event.target.focus() : fetchRepos()"
                :style="[inputError ? {border: '2px solid $red'} : null]"
                class="pagination-input"
-               v-model.trim="paginationInput"
+               v-model.trim="page"
                type="number">
         <div class="of">of</div>
-        <div class="total-page">{{totalPages}}</div>
+        <h5 class="total-page">{{totalPages}}</h5>
       </div>
-      <button class="icons" @click="nextPageEvent"
+      <button class="icons" @click="nextPage"
       :disabled="nextButtonDisabled">
         <PaginationNextPageArrow/>
       </button>
-      <button class="icons" @click="lastPageEvent"
+      <button class="icons" @click="lastPage"
       :disabled="nextButtonDisabled">
         <PaginationLastPageArrow/>
       </button>
@@ -32,6 +32,7 @@
   </div>
 </template>
 <script>
+import { mapState, mapActions } from 'vuex';
 import PaginationFirstPageArrow from '@/components/icons/PaginationFirstPageArrow.vue';
 import PaginationLastPageArrow from '@/components/icons/PaginationLastPageArrow.vue';
 import PaginationPreviousPageArrow from '@/components/icons/PaginationPreviousPageArrow.vue';
@@ -44,53 +45,40 @@ export default {
     PaginationPreviousPageArrow,
     PaginationNextPageArrow,
   },
-  props: {
-    targetPage: {
-      type: Number,
-      required: true,
-    },
-    totalRows: {
-      type: Number,
-      required: true,
-    },
-    per: {
-      type: Number,
-      required: true,
-    },
-  },
   data() {
     return {
-      paginationInput: null,
+      page: null,
       inputError: false,
     };
   },
   mounted() {
-    this.paginationInput = this.targetPage;
+    this.page = this.currentPage;
   },
   computed: {
+    ...mapState(['isLoading', 'isRepositoriesFetched', 'searchTerm', 'isNotification', 'errors', 'repositories', 'currentPage', 'perPage']),
     validateInput() {
-      if (this.isInvalidInput) {
+      if (this.isInvalidPageInput) {
         return `Please enter a number between 1 and ${this.totalPages}`;
       }
       return null;
     },
     previousButtonDisabled() {
-      return ((this.paginationInput || this.targetPage) <= 1);
+      return this.page <= 1;
     },
     nextButtonDisabled() {
-      return ((this.paginationInput || this.targetPage) >= this.totalPages);
+      return this.page >= this.totalPages;
     },
     totalPages() {
-      return Math.round(parseInt(this.totalRows / this.per, 10) - 1);
+      return Math.round(this.repositories.total_count / this.perPage);
     },
-    isInvalidInput() {
-      return this.paginationInput < 1
-      || this.paginationInput > this.totalPages;
+    isInvalidPageInput() {
+      return this.page < 1
+      || this.page > this.totalPages;
     },
   },
   watch: {
     validateInput() {
-      if (this.isInvalidInput) {
+      if (this.isInvalidPageInput) {
         this.inputError = true;
       } else {
         this.inputError = false;
@@ -98,24 +86,28 @@ export default {
     },
   },
   methods: {
-    submitPageInput() {
-      this.$emit('paginationInput', this.paginationInput);
+    ...mapActions(['fetchRepositories']),
+    nextPage() {
+      this.page += 1;
+      this.fetchRepos();
     },
-    nextPageEvent() {
-      this.paginationInput += 1;
-      this.$emit('nextPage', this.paginationInput);
+    previousPage() {
+      this.page -= 1;
+      this.fetchRepos();
     },
-    previousPageEvent() {
-      this.paginationInput -= 1;
-      this.$emit('previousPage', this.paginationInput);
+    firstPage() {
+      this.page = 1;
+      this.fetchRepos();
     },
-    firstPageEvent() {
-      this.paginationInput = 1;
-      this.$emit('firstPage', this.paginationInput);
+    lastPage() {
+      this.page = this.totalPages;
+      this.fetchRepos();
     },
-    lastPageEvent() {
-      this.paginationInput = this.totalPages;
-      this.$emit('lastPage', this.paginationInput);
+    fetchRepos() {
+      this.fetchRepositories({
+        searchTerm: this.searchTerm,
+        page: this.page,
+      });
     },
   },
 };
