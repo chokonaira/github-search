@@ -1,3 +1,5 @@
+const path = require('path');
+
 // vue.config.js
 module.exports = {
   devServer: {
@@ -22,5 +24,20 @@ module.exports = {
         'balm-ui-css': 'balm-ui/dist/balm-ui.css',
       },
     },
+  },
+  chainWebpack: (config) => {
+    config.module
+      .rule('supportChaining')
+      .test(/\.js$/)
+      .include
+      .add(path.resolve('node_modules/vue3-charts'))
+      .end()
+      .use('babel-loader')
+      .loader('babel-loader')
+      .tap((options) => ({
+        ...options,
+        plugins: ['@babel/plugin-proposal-optional-chaining'],
+      }))
+      .end();
   },
 };

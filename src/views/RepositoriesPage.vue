@@ -4,6 +4,7 @@
     <div class="github-repo-list-container">
       <Spinner v-if="isLoading"/>
       <div class="github-repo-list" v-else>
+        <!-- <RepoCharts /> -->
         <RepoCard v-if="toggleRepositoriesDisplay" />
         <div class="display-message" v-else>
           <img class='github-logo bounce' src="@/assets/images/github-logo-dark.png"
@@ -26,6 +27,7 @@ import RepoCard from '@/components/RepoCard.vue';
 import Notification from '@/components/Notification.vue';
 import Spinner from '@/components/Spinner.vue';
 import Pagination from '@/components/Pagination.vue';
+// import RepoCharts from '@/components/RepoCharts.vue';
 
 export default {
   components: {
@@ -33,6 +35,7 @@ export default {
     Notification,
     Spinner,
     Pagination,
+    // RepoCharts,
   },
   data() {
     return {

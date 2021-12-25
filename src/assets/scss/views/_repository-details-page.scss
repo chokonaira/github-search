@@ -2,29 +2,96 @@
   @include flex-col;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  margin-top: 70px;
-  height: 80vh;
+  @include md {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 
-.repo-details-wrapper {
+.repo-details-wrapper-1 {
   @include flex-col;
+  justify-content: center;
+  width: 100%;
+  margin-top: 100px;
+  @include md {
+    @include flex-row;
+    align-items: center;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    width: 50%;
+    height: 50vh;
+  }
+}
+
+.repo-details-wrapper-2 {
+  @include flex-col;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+  @include md {
+    @include flex-col;
+    margin-right: 30px;
+    margin-bottom: 30px;
+  }
+  
+  img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 20px;
+  }
+
+  a {
+    @include flex-row;
+    color: $purple;
+    font-size: $font-size-14;
+    align-items: center;
+  }
+
+  h3 {
+    margin-top: 20px;
+  }
+  
+  h4 {
+    color: $dark-grey;
+    span {
+      font-weight: bolder;
+    }
+  }
+}
+
+.repo-image-with-btn {
+  @include flex-col;
+  height: 310px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.repo-charts {
+  @include flex-row;
   align-items: center;
   justify-content: center;
-  width: 70%;
+  width: 100% !important;
   height: 400px;
-  margin-top: 70px;
-  background: $dark-grey;
-
-  img {
-    color: $white;
-  }
-
-  h1 {
-    color: $white;
+  margin-top: 30px;
+  @include md {
+    width: 40%;
+    margin-top: 0;
   }
 }
 
+.chart {
+  width: 100%;
+  max-width: 90%;
+}
 .repo-details-back-link {
   cursor: pointer;
+  height: 40px;
+  width: 40px;
+  border: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
