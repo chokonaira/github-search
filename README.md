@@ -2,7 +2,7 @@
 
 ### Github Actions CI Badges
 
-[![Node.js CI](https://github.com/chokonaira/github-repository/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-repository/actions/workflows/build.yml) [![Linter](https://github.com/chokonaira/github-repository/actions/workflows/linter.yml/badge.svg)](https://github.com/chokonaira/github-repository/actions/workflows/linter.yml)
+[![Node.js CI](https://github.com/chokonaira/github-repository/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-repository/actions/workflows/build.yml)
 
 ### Heroku URL
 - https://github-user-repository.herokuapp.com/

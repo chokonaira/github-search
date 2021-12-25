@@ -3,7 +3,7 @@
     <Notification v-if="isNotification" :state='state' :message='errors' />
       <div class="repo-details-wrapper-0">
         <Spinner v-if="isLoading"/>
-        <div v-else class="repo-details-wrapper-1">
+        <div v-else-if="isRepositoryFound" class="repo-details-wrapper-1">
             <div class="repo-details-wrapper-2">
               <div class="repo-image-with-btn">
                 <button class="repo-details-back-link"
@@ -19,9 +19,20 @@
               </div>
             </div>
           <div class="repo-charts">
-          <RepoCharts />
+            <RepoCharts />
+          </div>
         </div>
-      </div>
+        <div v-else class="display-message">
+          <img class='github-logo bounce' src="@/assets/images/github-logo-dark.png"
+            alt="github logo">
+          <h1 class='home-text'>
+            <span>We couldn’t find any repository</span>
+            <router-link class="repo-error-back-link" to='/'>
+            <ui-icon class="back-icon">west</ui-icon>
+            Go back to repositories page
+            </router-link>
+          </h1>
+        </div>
       </div>
   </div>
 </template>
@@ -51,9 +62,12 @@ export default {
     });
   },
   computed: {
-    ...mapState(['isLoading', 'isFetched', 'isNotification', 'errors', 'repository']),
+    ...mapState(['isLoading', 'isRepoFetched', 'isNotification', 'errors', 'repository']),
     date() {
       return dateFormatter(this.repository.created_at);
+    },
+    isRepositoryFound() {
+      return !this.isLoading && this.isRepoFetched;
     },
   },
   methods: {

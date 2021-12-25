@@ -4,16 +4,22 @@ import axios from 'axios';
 export default createStore({
   state: {
     isLoading: false,
-    isFetched: false,
+    isRepositoriesFetched: false,
+    isRepoFetched: false,
     errors: null,
     isNotification: false,
     searchTerm: null,
     repositories: [],
     repository: {},
+    currentPage: 1,
+    perPage: 15,
   },
   mutations: {
     setsearchTerm(state, payload) {
       state.searchTerm = payload;
+    },
+    setCurrentPage(state, payload) {
+      state.currentPage = payload;
     },
     setSpinner(state) {
       state.isLoading = true;
@@ -21,29 +27,34 @@ export default createStore({
     },
     addRepositories(state, payload) {
       state.isLoading = false;
-      state.isFetched = true;
+      state.isRepositoriesFetched = true;
       state.repositories = payload;
     },
     addRepository(state, payload) {
       state.isLoading = false;
-      state.isFetched = true;
+      state.isRepoFetched = true;
       state.repository = payload;
     },
-    apiError(state, payload) {
+    setErrors(state, payload) {
       state.isLoading = false;
       state.errors = payload;
       state.isNotification = true;
     },
   },
   actions: {
-    async fetchRepositories({ commit }, payload = 'random') {
+    async fetchRepositories({ commit, state }, { searchTerm, page }) {
       try {
         commit('setSpinner');
-        const { data } = await axios.get(`https://api.github.com/search/repositories?q=${payload}&page=1`);
-        commit('setsearchTerm', payload);
+        const { data } = await axios.get(`https://api.github.com/search/repositories?q=${searchTerm}&page=${page}&per_page=${state.perPage}`);
+        commit('setsearchTerm', searchTerm);
+        commit('setCurrentPage', page);
         commit('addRepositories', data);
-      } catch (error) {
-        commit('apiError', error.message);
+      } catch ({ message }) {
+        if (page > 67) {
+          commit('setErrors', 'Only the first 1000 repos results are available');
+        } else {
+          commit('setErrors', message);
+        }
       }
     },
     async fetchRepository({ commit }, { owner, repo }) {
@@ -52,7 +63,7 @@ export default createStore({
         const { data } = await axios.get(`https://api.github.com/repos/${owner}/${repo}`);
         commit('addRepository', data);
       } catch (error) {
-        commit('apiError', error.message);
+        commit('setErrors', error.message);
       }
     },
   },

@@ -30,7 +30,7 @@
     height: 50vh;
   }
   @include lg {
-    height: 70vh;
+    height: 50vh;
   }
 }
 
@@ -104,5 +104,18 @@
 
   &:hover {
     opacity: 0.7;
+  }
+}
+
+.repo-error-back-link {
+  font-size: $font-size-14;
+  @include flex-row;
+  align-items: center;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.7;
+  }
+  .back-icon {
+    margin-right: 5px;
   }
 }

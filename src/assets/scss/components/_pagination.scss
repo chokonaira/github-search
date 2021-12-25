@@ -1,48 +1,90 @@
-.pagination-container {
-  @include flex-row;
-  justify-content: flex-end;
-  width: 100%;
-  max-width: 90%;
-  margin-top: 18px;
-  background-color: yellow;
-  @include sm {
-    @include flex-row;
-    justify-content: flex-end;
-    width: 100%;
-    max-width: 80%;
-    margin-top: 18px;
+.pagination-control {
+    @include flex-col;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    width: 30%;
+    margin-bottom: 32px;
+  @include md {
+    margin-bottom: 32px
   }
 }
 
 .pagination-wrapper {
   @include flex-row;
-  align-items: center;
-  width: 20%;
-  // background: red;
   justify-content: space-between;
+  align-items: center;
+  width: 70%;
 }
 
-.pagination-btn {
+.pagination-counter {
+  @include flex-row;
+  width: 179px;
+  height: 32px;
+  align-items: center;
+  justify-content: space-around;
+  margin: 4px;
+  padding: 1px;
+}
+
+.pagination-input {
+  @include flex-row;
+  text-align: center;
+  border: 1px solid $light-grey;
+  margin-right: 3.5px;
+  border-radius: 4px;
+  letter-spacing: normal;
+  line-height: 24px;
+  font-size: $font-size-16;
+  height: 34px;
+  width: 80px;
+
+  &:focus{ 
+    border: 2px solid $light-grey;
+  }
+}
+
+.of {
+  letter-spacing: normal;
+  line-height: 24px;
+  font-size: $font-size-16;
+  margin-left: 3.5px;
+}
+
+.total-page {
+  letter-spacing: normal;
+  line-height: 24px;
+  font-size: $font-size-16;
+  margin-left: 8px
+}
+
+.icons {
+  @include flex-row;
+  align-items: center;
+  border: none;
+  height: 30px;
   width: 50px;
-  height: 40px;
-  border-radius: 5px;
-  border-color: transparent;
-}
-
-.mdc-pagination .mdc-button {
-  background: $light-grey !important;
-  color: $white !important;
-  border: none !important;
-  width: 35px !important;
-  height: 35px !important;
-  color: $dark-grey !important;
+  background: $light-grey;
+  border-radius: 3px;
+  padding: 7px;
+  margin: 7px;
 
   &:hover {
-    cursor: pointer !important;
-    background: $dark-grey !important;
-    color: $white !important;
+    cursor: pointer;
+    background: $dark-grey;
+    color: $white;
+    height: 70%;
   }
-  &:active {
-    background: $light-grey !important;
+
+  &:disabled {
+    opacity: 0.3;
+    background: transparent;
   }
+}
+
+.pagination-error {
+  letter-spacing: normal;
+  line-height: 15px;
+  font-size: $font-size-12;   
+  color: $red;
 }

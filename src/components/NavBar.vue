@@ -5,7 +5,10 @@
       <img class='nav-logo' src="@/assets/images/github-logo-dark.png"
             alt="github logo">
     </router-link>
-      <SearchInput :placeholder="'search repo..'" />
+      <SearchInput v-if="isRootPath" :placeholder="'search repo..'" />
+      <div v-else class="navbar-search">
+        <h1 class="navbar-title">Repository Overview</h1>
+        </div>
   </div>
 </template>
 <script>
@@ -15,8 +18,10 @@ export default {
   components: {
     SearchInput,
   },
-  props: {
-    msg: String,
+  computed: {
+    isRootPath() {
+      return this.$route.path === '/';
+    },
   },
 };
 </script>

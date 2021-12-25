@@ -14,9 +14,19 @@
           </h1>
           <h1 v-else class='home-text'>Search for any Github Repository</h1>
         </div>
+        <Pagination
+          v-if="togglePaginationDisplay"
+          :targetPage="page"
+          :per="perPage"
+          :totalRows="repositories.total_count"
+          @nextPage="nextPage"
+          @previousPage="previousPage"
+          @firstPage="firstPage"
+          @lastPage="lastPage"
+          @paginationInput="paginationInput"
+          />
       </div>
     </div>
-    <Pagination />
   </div>
 </template>
 
@@ -26,7 +36,6 @@ import RepoCard from '@/components/RepoCard.vue';
 import Notification from '@/components/Notification.vue';
 import Spinner from '@/components/Spinner.vue';
 import Pagination from '@/components/Pagination.vue';
-// import RepoCharts from '@/components/RepoCharts.vue';
 
 export default {
   components: {
@@ -34,27 +43,60 @@ export default {
     Notification,
     Spinner,
     Pagination,
-    // RepoCharts,
   },
   data() {
     return {
       state: 'error',
+      page: undefined,
     };
   },
   mounted() {
-    this.fetchRepositories();
+    this.page = this.currentPage;
+    this.fetchRepositories({
+      searchTerm: 'random',
+      page: this.currentPage,
+    });
   },
   computed: {
-    ...mapState(['isLoading', 'isFetched', 'searchTerm', 'isNotification', 'errors', 'repositories']),
+    ...mapState(['isLoading', 'isRepositoriesFetched', 'searchTerm', 'isNotification', 'errors', 'repositories', 'currentPage', 'perPage']),
     toggleRepositoriesDisplay() {
       return this.repositories.total_count > 0;
     },
+    togglePaginationDisplay() {
+      return (this.repositories.total_count > this.perPage) && !this.isLoading;
+    },
     noRepositoryFound() {
-      return this.isFetched && this.repositories.total_count === 0;
+      return this.isRepositoriesFetched && this.repositories.total_count === 0;
     },
   },
   methods: {
     ...mapActions(['fetchRepositories']),
+    nextPage(computedPageNumber) {
+      this.page = parseInt(computedPageNumber, 10);
+      this.fetchRepo();
+    },
+    previousPage(computedPageNumber) {
+      this.page = parseInt(computedPageNumber, 10);
+      this.fetchRepo();
+    },
+    firstPage(computedPageNumber) {
+      this.page = parseInt(computedPageNumber, 10);
+      this.fetchRepo();
+    },
+    lastPage(computedPageNumber) {
+      this.page = parseInt(computedPageNumber, 10);
+      this.fetchRepo();
+    },
+    paginationInput(computedPageNumber) {
+      this.page = parseInt(computedPageNumber, 10);
+      this.fetchRepo();
+    },
+    fetchRepo() {
+      this.fetchRepositories({
+        searchTerm: this.searchTerm,
+        page: this.page,
+      });
+    },
   },
 };
 </script>
