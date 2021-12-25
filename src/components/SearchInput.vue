@@ -41,7 +41,8 @@ export default {
   methods: {
     ...mapActions(['fetchRepositories']),
     fetchRepo(searchTerm) {
-      return this.fetchRepositories(searchTerm);
+      this.fetchRepositories(searchTerm);
+      this.searchTerm = '';
     },
   },
 };

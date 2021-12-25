@@ -9,6 +9,7 @@ export default createStore({
     isNotification: false,
     searchTerm: null,
     repositories: [],
+    repository: {},
   },
   mutations: {
     setsearchTerm(state, payload) {
@@ -23,6 +24,11 @@ export default createStore({
       state.isFetched = true;
       state.repositories = payload;
     },
+    addRepository(state, payload) {
+      state.isLoading = false;
+      state.isFetched = true;
+      state.repository = payload;
+    },
     apiError(state, payload) {
       state.isLoading = false;
       state.errors = payload;
@@ -36,6 +42,15 @@ export default createStore({
         const { data } = await axios.get(`https://api.github.com/search/repositories?q=${payload}&page=1`);
         commit('setsearchTerm', payload);
         commit('addRepositories', data);
+      } catch (error) {
+        commit('apiError', error.message);
+      }
+    },
+    async fetchRepository({ commit }, { owner, repo }) {
+      try {
+        commit('setSpinner');
+        const { data } = await axios.get(`https://api.github.com/repos/${owner}/${repo}`);
+        commit('addRepository', data);
       } catch (error) {
         commit('apiError', error.message);
       }

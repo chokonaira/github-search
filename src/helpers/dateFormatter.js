@@ -1,1 +1,1 @@
-export default (dateString) => dateString.substring(0, 10);
+export default (dateString) => dateString?.substring(0, 10);

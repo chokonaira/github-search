@@ -1,6 +1,6 @@
 <template>
   <Chart
-    :size="{ width: 700, height: 400 }"
+    :size="{ width: 700, height: 420 }"
     :data="data"
     :margin="margin"
     :direction="direction"
@@ -17,17 +17,12 @@
 
 <script >
 import { defineComponent } from 'vue';
+import { mapState } from 'vuex';
 import { Chart, Grid, Line } from 'vue3-charts';
 import chartData from '@/helpers/chartDataBuilder';
 
 export default defineComponent({
   name: 'LineChart',
-  props: {
-    repoDetails: {
-      type: Object,
-      required: true,
-    },
-  },
   components: { Chart, Grid, Line },
   data() {
     return {
@@ -38,13 +33,16 @@ export default defineComponent({
     };
   },
   mounted() {
-    if (this.repoDetails) {
+    if (this.repository) {
       const {
         forks_count: forksCount, watchers_count: starsCount,
         open_issues_count: issueCount,
-      } = this.repoDetails;
+      } = this.repository;
       this.data = chartData.builder(forksCount, starsCount, issueCount);
     }
+  },
+  computed: {
+    ...mapState(['repository']),
   },
 });
 </script>

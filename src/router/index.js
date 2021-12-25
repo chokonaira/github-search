@@ -8,7 +8,7 @@ const routes = [
     component: RepositoriesPage,
   },
   {
-    path: '/repo-details',
+    path: '/repo-details/:owner/:repo',
     name: 'RepositoryDetailsPage',
     component: () => import(/* webpackChunkName: "RepositoryDetailsPage" */ '../views/RepositoryDetailsPage.vue'),
     props: true,

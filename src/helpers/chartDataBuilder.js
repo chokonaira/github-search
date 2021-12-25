@@ -1,15 +1,15 @@
 export default {
   builder: (forksCount, starsCount, issuesCount) => ([
     {
-      githubTitle: 'No. of Repository Forks',
+      githubTitle: 'Repository Forks',
       counts: forksCount,
     },
     {
-      githubTitle: 'No. of Repository Stars',
+      githubTitle: 'Repository Stars',
       counts: starsCount,
     },
     {
-      githubTitle: 'No. of Repository Issue raised',
+      githubTitle: 'Repository Issue raised',
       counts: issuesCount,
     },
   ]),

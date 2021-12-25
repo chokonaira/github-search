@@ -4,7 +4,6 @@
     <div class="github-repo-list-container">
       <Spinner v-if="isLoading"/>
       <div class="github-repo-list" v-else>
-        <!-- <RepoCharts /> -->
         <RepoCard v-if="toggleRepositoriesDisplay" />
         <div class="display-message" v-else>
           <img class='github-logo bounce' src="@/assets/images/github-logo-dark.png"
