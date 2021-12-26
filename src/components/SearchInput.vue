@@ -14,7 +14,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { computed, ref } from 'vue';
+import { useStore } from 'vuex';
 import Button from '@/components/Button.vue';
 
 export default {
@@ -33,23 +34,24 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      searchTerm: '',
-    };
-  },
-  computed: {
-    ...mapState(['currentPage']),
-  },
-  methods: {
-    ...mapActions(['fetchRepositories']),
-    fetchRepos() {
-      this.fetchRepositories({
-        searchTerm: this.searchTerm,
-        page: this.currentPage,
+  setup() {
+    const store = useStore();
+    let searchTerm = ref('');
+
+    const currentPage = computed(() => store.state.currentPage);
+
+    function fetchRepos() {
+      store.dispatch('fetchRepositories', {
+        searchTerm,
+        page: currentPage.value,
       });
-      this.searchTerm = '';
-    },
+      searchTerm = '';
+    }
+
+    return {
+      searchTerm,
+      fetchRepos,
+    };
   },
 };
 </script>

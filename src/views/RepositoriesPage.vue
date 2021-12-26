@@ -21,7 +21,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import RepoCard from '@/components/RepoCard.vue';
 import Notification from '@/components/Notification.vue';
 import Spinner from '@/components/Spinner.vue';
@@ -34,26 +35,42 @@ export default {
     Spinner,
     Pagination,
   },
-  mounted() {
-    this.fetchRepositories({
-      searchTerm: this.searchTerm || 'random',
-      page: this.currentPage,
+  setup() {
+    const store = useStore();
+
+    const isLoading = computed(() => store.state.isLoading);
+    const isRepositoriesFetched = computed(() => store.state.isRepositoriesFetched);
+    const searchTerm = computed(() => store.state.searchTerm);
+    const isNotification = computed(() => store.state.isNotification);
+    const errors = computed(() => store.state.errors);
+    const repositories = computed(() => store.state.repositories);
+    const perPage = computed(() => store.state.perPage);
+    const currentPage = computed(() => store.state.currentPage);
+
+    const toggleRepositoriesDisplay = computed(() => repositories.value?.total_count > 0);
+    const togglePaginationDisplay = computed(() => repositories.value?.total_count > perPage.value)
+      && !isLoading.value;
+    const noRepositoryFound = computed(() => isRepositoriesFetched.value
+      && repositories.value?.total_count === 0);
+
+    store.dispatch('fetchRepositories', {
+      searchTerm: searchTerm.value,
+      page: currentPage.value,
     });
-  },
-  computed: {
-    ...mapState(['isLoading', 'isRepositoriesFetched', 'searchTerm', 'isNotification', 'errors', 'repositories', 'currentPage', 'perPage']),
-    toggleRepositoriesDisplay() {
-      return this.repositories.total_count > 0;
-    },
-    togglePaginationDisplay() {
-      return (this.repositories.total_count > this.perPage) && !this.isLoading;
-    },
-    noRepositoryFound() {
-      return this.isRepositoriesFetched && this.repositories.total_count === 0;
-    },
-  },
-  methods: {
-    ...mapActions(['fetchRepositories']),
+
+    return {
+      isLoading,
+      isRepositoriesFetched,
+      searchTerm,
+      isNotification,
+      errors,
+      repositories,
+      currentPage,
+      perPage,
+      toggleRepositoriesDisplay,
+      togglePaginationDisplay,
+      noRepositoryFound,
+    };
   },
 };
 </script>

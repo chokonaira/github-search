@@ -29,11 +29,22 @@
     </ui-card>
 </template>
 <script>
-import { mapState } from 'vuex';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 
 export default {
-  computed: {
-    ...mapState(['isLoading', 'repositories', 'searchTerm']),
+  setup() {
+    const store = useStore();
+
+    const isLoading = computed(() => store.state.isLoading);
+    const searchTerm = computed(() => store.state.searchTerm);
+    const repositories = computed(() => store.state.repositories);
+
+    return {
+      isLoading,
+      repositories,
+      searchTerm,
+    };
   },
 };
 </script>

@@ -16,33 +16,37 @@
 </template>
 
 <script >
-import { defineComponent } from 'vue';
-import { mapState } from 'vuex';
+import { defineComponent, computed, ref } from 'vue';
+import { useStore } from 'vuex';
 import { Chart, Grid, Line } from 'vue3-charts';
 import chartData from '@/helpers/chartDataBuilder';
 
 export default defineComponent({
   name: 'LineChart',
   components: { Chart, Grid, Line },
-  data() {
+  setup() {
+    const store = useStore();
+
+    let data = ref([]);
+    const direction = ref('horizontal');
+    const margin = ref(chartData.margin);
+    const axis = ref(chartData.axis);
+
+    const repository = computed(() => store.state.repository);
+
+    const {
+      forks_count: forksCount, watchers_count: starsCount,
+      open_issues_count: issueCount,
+    } = repository.value;
+
+    data = chartData.builder(forksCount, starsCount, issueCount);
+
     return {
-      data: [],
-      direction: 'horizontal',
-      margin: chartData.margin,
-      axis: chartData.axis,
+      data,
+      direction,
+      margin,
+      axis,
     };
-  },
-  mounted() {
-    if (this.repository) {
-      const {
-        forks_count: forksCount, watchers_count: starsCount,
-        open_issues_count: issueCount,
-      } = this.repository;
-      this.data = chartData.builder(forksCount, starsCount, issueCount);
-    }
-  },
-  computed: {
-    ...mapState(['repository']),
   },
 });
 </script>

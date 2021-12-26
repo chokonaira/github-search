@@ -1,6 +1,6 @@
 <template>
   <div class="repo-details-container">
-    <Notification v-if="isNotification" :state='state' :message='errors' />
+    <Notification v-if="isNotification" :message='errors' />
       <div class="repo-details-wrapper-0">
         <Spinner v-if="isLoading"/>
         <div v-else-if="isRepositoryFound" class="repo-details-wrapper-1">
@@ -37,7 +37,8 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from 'vuex';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import RepoCharts from '@/components/RepoCharts.vue';
 import Notification from '@/components/Notification.vue';
 import Spinner from '@/components/Spinner.vue';
@@ -50,28 +51,32 @@ export default {
     Notification,
     Spinner,
   },
-  data() {
-    return {
-      state: 'error',
-    };
-  },
-  mounted() {
-    this.fetchRepository({
-      owner: this.owner,
-      repo: this.repo,
+  setup(props) {
+    const store = useStore();
+
+    const isLoading = computed(() => store.state.isLoading);
+    const isNotification = computed(() => store.state.isNotification);
+    const errors = computed(() => store.state.errors);
+    const repository = computed(() => store.state.repository);
+    const isRepoFetched = computed(() => store.state.isRepoFetched);
+
+    const date = computed(() => dateFormatter(repository.value?.created_at));
+    const isRepositoryFound = computed(() => !isLoading.value && isRepoFetched.value)
+      && !isLoading.value;
+
+    store.dispatch('fetchRepository', {
+      owner: props.owner,
+      repo: props.repo,
     });
-  },
-  computed: {
-    ...mapState(['isLoading', 'isRepoFetched', 'isNotification', 'errors', 'repository']),
-    date() {
-      return dateFormatter(this.repository?.created_at);
-    },
-    isRepositoryFound() {
-      return !this.isLoading && this.isRepoFetched;
-    },
-  },
-  methods: {
-    ...mapActions(['fetchRepository']),
+
+    return {
+      isLoading,
+      isNotification,
+      errors,
+      repository,
+      date,
+      isRepositoryFound,
+    };
   },
 };
 </script>

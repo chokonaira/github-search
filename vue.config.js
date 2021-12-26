@@ -2,6 +2,7 @@ const path = require('path');
 
 // vue.config.js
 module.exports = {
+  plugins: ['~/plugins/composition-api'],
   devServer: {
     disableHostCheck: true,
     port: 3000,
