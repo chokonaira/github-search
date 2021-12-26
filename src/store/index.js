@@ -1,5 +1,6 @@
 import { createStore } from 'vuex';
-import axios from 'axios';
+import axiosConfig from '@/helpers/axiosConfig';
+import { allRepositoriesUrl, aRepositoryUrl } from '@/helpers/urlBuilder';
 
 export default createStore({
   state: {
@@ -15,56 +16,58 @@ export default createStore({
     perPage: 15,
   },
   mutations: {
-    setSearchTerm(state, payload) {
+    SET_SEARCH_TERM(state, payload) {
       state.searchTerm = payload;
     },
-    setCurrentPage(state, payload) {
+    SET_CURRENT_PAGE(state, payload) {
       state.currentPage = payload;
     },
-    setSpinner(state) {
+    SET_SPINNER(state) {
       state.isLoading = true;
       state.isNotification = false;
     },
-    addRepositories(state, payload) {
+    ADD_REPOSITORIES(state, payload) {
       state.isLoading = false;
       state.isRepositoriesFetched = true;
       state.repositories = payload;
     },
-    addRepository(state, payload) {
+    ADD_REPOSITORY(state, payload) {
       state.isLoading = false;
       state.isRepoFetched = true;
       state.repository = payload;
     },
-    setErrors(state, payload) {
+    SET_ERRORS(state, payload) {
       state.isLoading = false;
       state.errors = payload;
       state.isNotification = true;
     },
   },
   actions: {
-    async fetchRepositories({ commit, state }, { searchTerm, page }) {
-      try {
-        commit('setSpinner');
-        const { data } = await axios.get(`https://api.github.com/search/repositories?q=${searchTerm}&page=${page}&per_page=${state.perPage}`);
-        commit('setSearchTerm', searchTerm);
-        commit('setCurrentPage', page);
-        commit('addRepositories', data);
-      } catch ({ message }) {
-        if (page > 67) {
-          commit('setErrors', 'Only the first 1000 repos results are available');
-        } else {
-          commit('setErrors', message);
-        }
-      }
+    fetchRepositories({ commit, state }, { searchTerm, page }) {
+      commit('SET_SPINNER');
+      return axiosConfig(allRepositoriesUrl(searchTerm, page, state.perPage)).get()
+        .then((data) => {
+          commit('SET_SEARCH_TERM', searchTerm);
+          commit('SET_CURRENT_PAGE', page);
+          commit('ADD_REPOSITORIES', data.data);
+        })
+        .catch(({ message }) => {
+          if (page > 67) {
+            commit('SET_ERRORS', 'Only the first 1000 repos results are available');
+          } else {
+            commit('SET_ERRORS', message);
+          }
+        });
     },
-    async fetchRepository({ commit }, { owner, repo }) {
-      try {
-        commit('setSpinner');
-        const { data } = await axios.get(`https://api.github.com/repos/${owner}/${repo}`);
-        commit('addRepository', data);
-      } catch (error) {
-        commit('setErrors', error.message);
-      }
+    fetchRepository({ commit }, { owner, repo }) {
+      commit('SET_SPINNER');
+      return axiosConfig(aRepositoryUrl(owner, repo)).get()
+        .then((data) => {
+          commit('ADD_REPOSITORY', data.data);
+        })
+        .catch(({ message }) => {
+          commit('SET_ERRORS', message);
+        });
     },
   },
 });

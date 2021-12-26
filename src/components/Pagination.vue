@@ -53,7 +53,7 @@ export default {
     const page = computed({
       get: () => parseInt(store.state.currentPage, 10),
       set: (value) => {
-        store.commit('setCurrentPage', value);
+        store.commit('SET_CURRENT_PAGE', value);
       },
     });
 
