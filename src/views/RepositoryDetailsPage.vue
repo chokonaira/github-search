@@ -61,8 +61,7 @@ export default {
     const isRepoFetched = computed(() => store.state.isRepoFetched);
 
     const date = computed(() => dateFormatter(repository.value?.created_at));
-    const isRepositoryFound = computed(() => !isLoading.value && isRepoFetched.value)
-      && !isLoading.value;
+    const isRepositoryFound = computed(() => !isLoading.value && isRepoFetched.value);
 
     store.dispatch('fetchRepository', {
       owner: props.owner,
