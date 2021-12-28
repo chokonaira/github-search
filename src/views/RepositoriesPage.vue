@@ -12,7 +12,7 @@
             <span>We couldn’t find any repositories</span>
             <span> matching "{{searchTerm}}"</span>
           </h1>
-          <h1 v-else class='home-text'>Search for any Github Repository</h1>
+          <Spinner v-else/>
         </div>
         <Pagination v-if="togglePaginationDisplay" />
       </div>
