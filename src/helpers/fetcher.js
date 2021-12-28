@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axiosConfig from '@/helpers/axiosConfig';
 
 export default async (url) => {
-  const { data } = await axios.get(url);
+  const { data } = await axiosConfig(url).get();
   return data;
 };

@@ -37,6 +37,8 @@ import PaginationFirstPageArrow from '@/components/icons/PaginationFirstPageArro
 import PaginationLastPageArrow from '@/components/icons/PaginationLastPageArrow.vue';
 import PaginationPreviousPageArrow from '@/components/icons/PaginationPreviousPageArrow.vue';
 import PaginationNextPageArrow from '@/components/icons/PaginationNextPageArrow.vue';
+import useSWRVCache from '@/helpers/swrvCache';
+import { allRepositoriesUrl } from '@/helpers/urlBuilder';
 
 export default {
   components: {
@@ -48,6 +50,7 @@ export default {
   setup() {
     const store = useStore();
 
+    const hasClicked = ref(false);
     let inputError = ref(false);
 
     const page = computed({
@@ -75,14 +78,28 @@ export default {
       return null;
     });
 
+    const { data, error } = useSWRVCache(() => hasClicked.value
+    && allRepositoriesUrl(searchTerm.value, page.value, perPage.value));
+
     function fetchRepos() {
       if (isInvalidPageInput.value) {
-        return null;
+        return;
       }
-      return store.dispatch('fetchRepositories', {
-        searchTerm: searchTerm.value,
-        page: page.value,
-      });
+
+      if (page.value > 67) {
+        store.commit('SET_ERRORS', 'Only the first 1000 repos results are available');
+        return;
+      }
+
+      hasClicked.value = true;
+
+      store.commit('SET_SEARCH_TERM', searchTerm.value);
+      store.commit('SET_CURRENT_PAGE', page.value);
+      store.commit('ADD_REPOSITORIES', data);
+
+      if (error.value) {
+        store.commit('SET_ERRORS', error.value);
+      }
     }
 
     function nextPage() {

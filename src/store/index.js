@@ -1,5 +1,5 @@
 import { createStore } from 'vuex';
-import axiosConfig from '@/helpers/axiosConfig';
+import useSWRVCache from '@/helpers/swrvCache';
 import { allRepositoriesUrl, aRepositoryUrl } from '@/helpers/urlBuilder';
 
 export default createStore({
@@ -45,29 +45,30 @@ export default createStore({
   actions: {
     fetchRepositories({ commit, state }, { searchTerm, page }) {
       commit('SET_SPINNER');
-      return axiosConfig(allRepositoriesUrl(searchTerm, page, state.perPage)).get()
-        .then((data) => {
-          commit('SET_SEARCH_TERM', searchTerm);
-          commit('SET_CURRENT_PAGE', page);
-          commit('ADD_REPOSITORIES', data.data);
-        })
-        .catch(({ message }) => {
-          if (page > 67) {
-            commit('SET_ERRORS', 'Only the first 1000 repos results are available');
-          } else {
-            commit('SET_ERRORS', message);
-          }
-        });
+
+      const { data, error } = useSWRVCache(allRepositoriesUrl(searchTerm, page, state.perPage));
+
+      commit('SET_SEARCH_TERM', searchTerm);
+      commit('SET_CURRENT_PAGE', page);
+      commit('ADD_REPOSITORIES', data);
+
+      if (page > 67) {
+        commit('SET_ERRORS', 'Only the first 1000 repos results are available');
+      } else if (error.value) {
+        commit('SET_ERRORS', error.value);
+      }
     },
+
     fetchRepository({ commit }, { owner, repo }) {
       commit('SET_SPINNER');
-      return axiosConfig(aRepositoryUrl(owner, repo)).get()
-        .then((data) => {
-          commit('ADD_REPOSITORY', data.data);
-        })
-        .catch(({ message }) => {
-          commit('SET_ERRORS', message);
-        });
+
+      const { data, error } = useSWRVCache(aRepositoryUrl(owner, repo));
+
+      commit('ADD_REPOSITORY', data);
+
+      if (error.value) {
+        commit('SET_ERRORS', error.value);
+      }
     },
   },
 });
