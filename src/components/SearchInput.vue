@@ -39,28 +39,25 @@ export default {
   setup() {
     const store = useStore();
 
-    let searchTerm = ref('');
+    const searchTerm = ref('');
+    const resetPagination = ref(1);
     const hasClicked = ref(false);
 
-    const currentPage = computed(() => store.state.currentPage);
     const perPage = computed(() => store.state.perPage);
 
     const { data, error } = useSWRVCache(() => hasClicked.value
-    && allRepositoriesUrl(searchTerm.value, currentPage.value, perPage.value));
+    && allRepositoriesUrl(searchTerm.value,
+      resetPagination.value, perPage.value));
 
     function fetchRepos() {
       hasClicked.value = true;
 
       store.commit('SET_SEARCH_TERM', searchTerm.value);
-      store.commit('SET_CURRENT_PAGE', currentPage.value);
+      store.commit('SET_CURRENT_PAGE', resetPagination.value);
       store.commit('ADD_REPOSITORIES', data);
 
       if (error.value) {
         store.commit('SET_ERRORS', error.value);
-      }
-
-      if (hasClicked.value) {
-        searchTerm = '';
       }
     }
 

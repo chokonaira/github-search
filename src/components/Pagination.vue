@@ -108,7 +108,7 @@ export default {
     }
 
     function previousPage() {
-      page.value += 1;
+      page.value -= 1;
       fetchRepos();
     }
 

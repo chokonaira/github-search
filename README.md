@@ -1,6 +1,6 @@
 ## Github Search
 
-A Vue app where users are able to search for a repository and based on their search a list of matching repositories would render. users can also vue details of a specific repository and see a graph of some activities. Caching is implemented with localstorage.
+A Vue app where users are able to search for a repository and based on their search a list of matching repositories would render. users can also vue details of a specific repository and see a graph of some activities. Caching is implemented with [SWRV](https://docs-swrv.netlify.app/guide/getting-started.html).
 #### Github Actions CI Badges
 
 [![Node.js CI](https://github.com/chokonaira/github-repository/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-repository/actions/workflows/build.yml)

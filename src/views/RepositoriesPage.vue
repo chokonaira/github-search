@@ -48,10 +48,10 @@ export default {
     const currentPage = computed(() => store.state.currentPage);
 
     const toggleRepositoriesDisplay = computed(() => repositories.value?.total_count > 0);
-    const togglePaginationDisplay = computed(() => repositories.value?.total_count > perPage.value)
-      && !isLoading.value;
-    const noRepositoryFound = computed(() => isRepositoriesFetched.value
-      && repositories.value?.total_count === 0);
+    const noRepositoryFound = computed(() => (isRepositoriesFetched.value
+      && repositories.value?.total_count === 0) && !isLoading.value);
+    const togglePaginationDisplay = computed(() => (repositories.value?.total_count > perPage.value)
+      && (!isLoading.value && !noRepositoryFound.value));
 
     store.dispatch('fetchRepositories', {
       searchTerm: searchTerm.value,
