@@ -1,22 +1,19 @@
 <template>
   <div class="repositories-container">
       <Notification v-if="isNotification" :message='errors' />
-    <div class="github-repo-list-container">
-      <Spinner v-if="isLoading"/>
-      <div class="github-repo-list" v-else>
+      <div class="github-repo-list">
         <RepoCard v-if="toggleRepositoriesDisplay" />
-        <div class="display-message" v-else>
+        <Spinner v-else/>
+        <div class="display-message" v-if="noRepositoryFound">
           <img class='github-logo bounce' src="@/assets/images/github-logo-dark.png"
             alt="github logo">
-          <h1 v-if="noRepositoryFound" class='home-text'>
+          <h1 class='home-text'>
             <span>We couldn’t find any repositories</span>
             <span> matching "{{searchTerm}}"</span>
           </h1>
-          <Spinner v-else/>
         </div>
         <Pagination v-if="togglePaginationDisplay" />
       </div>
-    </div>
   </div>
 </template>
 
@@ -38,7 +35,6 @@ export default {
   setup() {
     const store = useStore();
 
-    const isLoading = computed(() => store.state.isLoading);
     const isRepositoriesFetched = computed(() => store.state.isRepositoriesFetched);
     const searchTerm = computed(() => store.state.searchTerm);
     const isNotification = computed(() => store.state.isNotification);
@@ -48,10 +44,10 @@ export default {
     const currentPage = computed(() => store.state.currentPage);
 
     const toggleRepositoriesDisplay = computed(() => repositories.value?.total_count > 0);
-    const noRepositoryFound = computed(() => (isRepositoriesFetched.value
-      && repositories.value?.total_count === 0) && !isLoading.value);
+    const noRepositoryFound = computed(() => isRepositoriesFetched.value
+      && repositories.value?.total_count === 0);
     const togglePaginationDisplay = computed(() => (repositories.value?.total_count > perPage.value)
-      && (!isLoading.value && !noRepositoryFound.value));
+      && (!toggleRepositoriesDisplay.value && !noRepositoryFound.value));
 
     store.dispatch('fetchRepositories', {
       searchTerm: searchTerm.value,
@@ -59,7 +55,6 @@ export default {
     });
 
     return {
-      isLoading,
       isRepositoriesFetched,
       searchTerm,
       isNotification,

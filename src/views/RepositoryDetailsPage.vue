@@ -2,8 +2,7 @@
   <div class="repo-details-container">
     <Notification v-if="isNotification" :message='errors' />
       <div class="repo-details-wrapper-0">
-        <Spinner v-if="isLoading"/>
-        <div v-else-if="isRepositoryFound" class="repo-details-wrapper-1">
+        <div v-if="isRepositoryFound" class="repo-details-wrapper-1">
             <div class="repo-details-wrapper-2">
               <div class="repo-image-with-btn">
                 <button class="repo-details-back-link"
@@ -23,9 +22,11 @@
           </div>
         </div>
         <div v-else class="display-message">
-          <img class='github-logo bounce' src="@/assets/images/github-logo-dark.png"
+          <Spinner v-if="!isRepositoryFound"/>
+          <img v-if="isRepositoryFound" class='github-logo bounce'
+            src="@/assets/images/github-logo-dark.png"
             alt="github logo">
-          <h1 class='home-text'>
+          <h1 v-if="isRepositoryFound" class='home-text'>
             <span>We couldn’t find any repository</span>
             <router-link class="repo-error-back-link" to='/'>
             <ui-icon class="back-icon">west</ui-icon>
@@ -61,7 +62,8 @@ export default {
     const repository = computed(() => store.state.repository);
     const isRepoFetched = computed(() => store.state.isRepoFetched);
     const date = computed(() => dateFormatter(repository.value?.created_at));
-    const isRepositoryFound = computed(() => !isLoading.value && isRepoFetched.value);
+    const isRepositoryFound = computed(() => !isLoading.value && isRepoFetched.value
+      && repository.value);
 
     store.dispatch('fetchRepository', {
       owner: props.owner,

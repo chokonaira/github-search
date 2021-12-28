@@ -4,7 +4,7 @@
       :placeholder='placeholder'
       v-model.trim="searchTerm"
       class='search-input'
-      v-bind="$attrs"
+      @keyup.enter="fetchRepos()"
     >
     <Button
         @click="fetchRepos()"

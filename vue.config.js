@@ -4,8 +4,8 @@ const path = require('path');
 module.exports = {
   devServer: {
     disableHostCheck: true,
-    port: 3000,
-    public: '0.0.0.0:3000',
+    port: 3001,
+    public: '0.0.0.0:3001',
   },
   publicPath: '/',
   css: {
