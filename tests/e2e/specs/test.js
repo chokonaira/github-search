@@ -1,8 +1,8 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('My First Test', () => {
+describe('Repositories Page', () => {
   it('Visits the app root url', () => {
     cy.visit('/');
-    cy.contains('h1', 'This is an Home page');
+    cy.contains('span', 'We couldn’t find any repositories');
   });
 });

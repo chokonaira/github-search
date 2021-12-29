@@ -37,7 +37,18 @@ module.exports = {
       .tap((options) => ({
         ...options,
         plugins: ['@babel/plugin-proposal-optional-chaining'],
-      }))
+      }));
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap((options) => {
+        // eslint-disable-next-line no-param-reassign
+        options.compilerOptions = {
+          ...(options.compilerOptions || {}),
+          isCustomElement: (tag) => /^x-/.test(tag),
+        };
+        return options;
+      })
       .end();
   },
 };

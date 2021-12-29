@@ -6,7 +6,6 @@
 
 export default {
   inheritAttrs: false,
-  emits: ['methodName'],
   props: {
     title: {
       type: String,
