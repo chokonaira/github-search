@@ -1,8 +1,12 @@
 <template>
   <div class="repositories-container">
       <Notification v-if="isNotification" :message='errors' />
-      <div class="github-repo-list">
-        <RepoCard v-if="toggleRepositoriesDisplay" />
+      <div class="github-repo-list-container">
+      <div class="github-repo-list-wrapper">
+        <div class="github-repo-list" v-if="toggleRepositoriesDisplay" >
+          <RepoCard />
+          <Pagination />
+        </div>
         <Spinner v-else/>
         <div class="display-message" v-if="noRepositoryFound">
           <img class='github-logo bounce' src="@/assets/images/github-logo-dark.png"
@@ -12,7 +16,7 @@
             <span> matching "{{searchTerm}}"</span>
           </h1>
         </div>
-        <Pagination v-if="togglePaginationDisplay" />
+      </div>
       </div>
   </div>
 </template>
@@ -46,8 +50,8 @@ export default {
     const toggleRepositoriesDisplay = computed(() => repositories.value?.total_count > 0);
     const noRepositoryFound = computed(() => isRepositoriesFetched.value
       && repositories.value?.total_count === 0);
-    const togglePaginationDisplay = computed(() => (repositories.value?.total_count > perPage.value)
-      && (!toggleRepositoriesDisplay.value && !noRepositoryFound.value));
+    const togglePaginationDisplay = computed(() => (repositories.value?.total_count
+      > perPage.value) && !noRepositoryFound.value);
 
     store.dispatch('fetchRepositories', {
       searchTerm: searchTerm.value,

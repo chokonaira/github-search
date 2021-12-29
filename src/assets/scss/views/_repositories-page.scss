@@ -1,17 +1,31 @@
 .repositories-container {
   @include flex-col;
-  margin-top: 70px;
   justify-content: center;
   @include lg {
     align-items: center;
   }
 }
 
+.github-repo-list-container {
+  @include flex-col;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 70px;
+}
+
+.github-repo-list-wrapper {
+  @include flex-col;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
 .github-repo-list {
   @include flex-col;
   width: 100%;
   max-width: 100%;
-  margin-top: 70px;
+  margin-top: 50px;
   align-items: center;
 }
 

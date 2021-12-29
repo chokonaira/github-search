@@ -7,8 +7,14 @@ API request and caching are handled with [axios](https://www.npmjs.com/package/a
 
 [![Node.js CI](https://github.com/chokonaira/github-repository/actions/workflows/build.yml/badge.svg)](https://github.com/chokonaira/github-repository/actions/workflows/build.yml)
 
-### Heroku URL
+### Heroku Frontend URL
 - https://henry-git-search.herokuapp.com/
+
+### Heroku Backend URL
+- https://henry-git-search-backend.herokuapp.com
+
+### Backend Repository
+- https://github.com/chokonaira/github-search-backend
 
 ### Project setup
 - git clone https://github.com/chokonaira/github-repository.git
@@ -27,3 +33,41 @@ Note - The Github API is limited to 60 request per hour from the same IP address
 
 ### Lints and fixes files
 - npm run lint
+
+### Documentation
+#### Website Routes
+- Search all repositories - `/`
+- Fetch a specific repository details - `/repo-details/:owner/:repo`
+
+#### Server Endpoints
+- Search all repositories - `/repositories/${searchTerm}/${page}/${perPage}`
+- Fetch a specific repositories - `/repositories/${owner}/${repo}`
+
+#### Github URL Base
+- Search all repositories - `https://api.github.com/search/repositories`
+- Fetch a specific repository details - `https://api.github.com/repos/`
+
+#### Core Technology & tools
+##### Scaffolding and development
+- [Vue CLI](https://cli.vuejs.org/guide/) 
+- [Vue 3](https://v3.vuejs.org/guide/migration/introduction.html#overview) 
+- [Vue Composition Api](https://v3.vuejs.org/guide/composition-api-introduction.html)
+- [Vuex](https://vuex.vuejs.org/)
+- [Vue Router](https://router.vuejs.org/)
+- [Chart](https://www.npmjs.com/package/vue3-charts)
+- [Express](https://expressjs.com/)
+##### API Request and caching
+- [Axios](https://www.npmjs.com/package/axios)
+- [SWRV](https://docs-swrv.netlify.app/)
+
+##### Testing
+- [Vue Test Utils](https://vue-test-utils.vuejs.org/)
+- [E2e](https://www.cypress.io/)
+
+##### Component Library & Styling
+- [SCSS](https://sass-lang.com/)
+- [BalmUI](https://material.balmjs.com/#/)
+
+##### Devops - CI/CD
+- [Github actions](https://github.com/features/actions)
+- [Heroku](https://dashboard.heroku.com/)
