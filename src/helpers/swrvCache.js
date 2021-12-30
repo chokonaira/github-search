@@ -9,16 +9,18 @@ import fetcher from '@/helpers/fetcher';
 // The third argument is opetional, here I passed in a object
 // with cache plugin and other configurations as per needed.
 
+export const cacheConfig = {
+  cache: new LocalStorageCache(),
+  dedupingInterval: 5000,
+  errorRetryCount: 2,
+  revalidateDebounce: 2000,
+  revalidateOnFocus: true,
+  shouldRetryOnError: true,
+  ttl: 60 * 60 * 1000, // 1 hour stale cached data validity
+};
+
 export default (key) => {
-  const { data, error } = useSWRV(key, fetcher, {
-    cache: new LocalStorageCache(),
-    ttl: 60 * 60 * 1000, // keep stale data for only one hour
-    dedupingInterval: 5000,
-    shouldRetryOnError: true,
-    errorRetryCount: 2,
-    revalidateOnFocus: true,
-    revalidateDebounce: 2000,
-  });
+  const { data, error } = useSWRV(key, fetcher, cacheConfig);
 
   return {
     data,

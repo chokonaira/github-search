@@ -1,3 +1,5 @@
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 import MockAdapter from 'axios-mock-adapter';
 import fetcher from '@/helpers/fetcher';
 import { allRepositoriesUrl, aRepositoryUrl } from '@/helpers/urlBuilder';

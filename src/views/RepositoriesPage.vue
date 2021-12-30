@@ -56,6 +56,7 @@ export default {
     store.dispatch('fetchRepositories', {
       searchTerm: searchTerm.value,
       page: currentPage.value,
+      perPage: perPage.value,
     });
 
     return {

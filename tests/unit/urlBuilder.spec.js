@@ -1,6 +1,6 @@
 import { allRepositoriesUrl, aRepositoryUrl } from '@/helpers/urlBuilder';
 
-describe('dateFormatter.js', () => {
+describe('urlBuilder.js', () => {
   it('contructs a url to search for all repositories', () => {
     const searchTerm = 'search';
     const page = 1;
