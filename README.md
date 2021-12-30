@@ -1,6 +1,6 @@
 ## Github Search
 
-A Vue app where users can search for Github repositories and based on their search a list of matching repositories would render. By default, the home page renders a default search for repositories that matches the word `Random`. Users can also vue details of a specific repository and see a graph of some activities within it. 
+A Vue app leveraging the [Gihub API](https://docs.github.com/en/rest), where users can search for Github repositories and based on their search a list of matching repositories would render. By default, the home page renders a default search for repositories that matches the word `Random`. Users can also vue details of a specific repository and see some details like, repo owners username, date of creation and a graph of some other activities within it like number of forks, stars, issues, etc. 
 
 API request and caching are handled with [axios](https://www.npmjs.com/package/axios) and [SWRV](https://docs-swrv.netlify.app/guide/getting-started.html) with `LocalStorageCache`.
 #### Github Actions CI Badges
@@ -13,17 +13,13 @@ API request and caching are handled with [axios](https://www.npmjs.com/package/a
 ### Heroku Backend URL
 - https://henry-git-search-backend.herokuapp.com
 
-### Backend Repository
+### Backend Repository URL
 - https://github.com/chokonaira/github-search-backend
 
 ### Project setup
 - git clone https://github.com/chokonaira/github-repository.git
 - npm install
 - npm start
-
-Note - The Github API is limited to 60 request per hour from the same IP address, it you intend to exceed that, you will need to create a [personal token](https://github.com/settings/tokens/new) on github, copy the variable key in `.env.example` file, add a new `.env` file in the root directory of this project, paste the variable and assign your newly created access token as the value. 
-
-`Example` - `VUE_APP_GITHUB_ACCESS_TOKEN:<ghp_github-personal-token>`
 
 ### Run unit tests
 - npm run test:unit
@@ -36,12 +32,12 @@ Note - The Github API is limited to 60 request per hour from the same IP address
 
 ### Documentation
 #### Website Routes
-- Search all repositories - `/`
-- Fetch a specific repository details - `/repo-details/:owner/:repo`
+- Search all repositories page - `/`
+- Fetch a specific repository details page - `/repo-details/:owner/:repo`
 
 #### Server Endpoints
-- Search all repositories - `/repositories/${searchTerm}/${page}/${perPage}`
-- Fetch a specific repositories - `/repositories/${owner}/${repo}`
+- Search all repositories - `/repositories/:searchTerm/:page/perPage`
+- Fetch a specific repositories - `/repositories/:owner/:repo`
 
 #### Github URL Base
 - Search all repositories - `https://api.github.com/search/repositories`
