@@ -5,6 +5,10 @@ import axiosConfig from '@/helpers/axiosConfig';
 // returned and cached and  by swvr function in swrvCache.js
 
 export default async (url) => {
-  const { data } = await axiosConfig(url).get();
-  return data;
+  try {
+    const { data } = await axiosConfig(url).get();
+    return data;
+  } catch (error) {
+    return error;
+  }
 };
