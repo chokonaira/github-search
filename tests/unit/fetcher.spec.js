@@ -12,7 +12,7 @@ describe('fetcher.js', () => {
     const perPage = 10;
     const mockAdapter = new MockAdapter(axiosConfig(allRepositoriesUrl(searchTerm, page, perPage)));
 
-    it('Successfull https request that returns a list all repos matching search term', async (done) => {
+    it('Successfull https request that returns a list all repos matching search term', async () => {
       const reposData = [
         {
           total_count: 20,
@@ -35,7 +35,6 @@ describe('fetcher.js', () => {
 
       await fetcher(allRepositoriesUrl(searchTerm, page, perPage));
       expect(payload.handlers.get[0][4]).toEqual(reposData);
-      done();
     });
 
     it('UnSuccessfull async https request and returns a error', async (done) => {
@@ -54,7 +53,7 @@ describe('fetcher.js', () => {
     const repo = 'ZoomHeader';
     const mockAdapter = new MockAdapter(axiosConfig(aRepositoryUrl(owner, repo)));
 
-    it('Successfull https request that returns a repos matching owner and title', async (done) => {
+    it('Successfull https request that returns a repos matching owner and title', async () => {
       const repoData = {
         total_count: 0,
         created_at: '2016-06-01T21:12:52Z',
@@ -68,10 +67,9 @@ describe('fetcher.js', () => {
 
       await fetcher(aRepositoryUrl(owner, repo));
       expect(payload.handlers.get[0][4]).toEqual(repoData);
-      done();
     });
 
-    it('UnSuccessfull async https request and returns a error', async (done) => {
+    it('UnSuccessfull async https request and returns a error', async () => {
       const errorMessage = 'Error 404, repo not found';
 
       const payload = mockAdapter.onGet()
@@ -79,7 +77,6 @@ describe('fetcher.js', () => {
 
       await fetcher(aRepositoryUrl(owner, repo));
       expect(payload.handlers.get[0][4]).toEqual(errorMessage);
-      done();
     });
   });
 });
